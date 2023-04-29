@@ -6,8 +6,10 @@ import Footer from "./Footer";
 function App() {
   return (
     <div className="App">
-      <SearchEngine />
-      <Footer />
+      <div className="Content">
+        <SearchEngine />
+        <Footer />
+      </div>
     </div>
   );
 }
