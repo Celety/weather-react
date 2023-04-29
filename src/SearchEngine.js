@@ -30,10 +30,25 @@ export default function SearchEngine() {
 
   let searchForCity = (
     <div className="SearchEngine">
-      <h1>Weather Search Engine</h1>
       <form onSubmit={changeCity}>
-        <input type="search" placeholder="Type a city" onChange={updateCity} />
-        <input type="submit" value="Search" />
+        <div class="input-group mb-3">
+          <input
+            type="search"
+            placeholder="Type a city"
+            class="form-control"
+            aria-label="Recipient's username"
+            aria-describedby="button-addon2"
+            autocomplete="off"
+            onChange={updateCity}
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="submit"
+            id="button-addon2"
+          >
+            🔎
+          </button>
+        </div>
       </form>
     </div>
   );
