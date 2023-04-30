@@ -1,0 +1,32 @@
+.mainData {
+  margin-top: 2px;
+  padding-left: 4px;
+}
+
+.hourlyForecast {
+  padding: 0px;
+  margin: 0 auto;
+}
+
+.city {
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.hour {
+  font-weight: lighter;
+  font-size: 30px;
+}
+
+.weather {
+  text-align: center;
+  font-weight: bold;
+  font-size: 80px;
+}
+
+.weather-conditions {
+  font-weight: lighter;
+  font-size: 1rem;
+  font-weight: 400;
+  text-transform: capitalize;
+}

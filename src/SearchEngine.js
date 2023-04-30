@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+
+import DefaultInfo from "./DefaultInfo";
 import "./SearchEngine.css";
 
 export default function SearchEngine() {
@@ -55,8 +57,9 @@ export default function SearchEngine() {
 
   if (search) {
     return (
-      <div>
+      <div className="col-9">
         {searchForCity}
+        <DefaultInfo />
         <ul>
           <li>Temperature: {Math.round(weather.temperature)}°C</li>
           <li>Description: {weather.description}</li>
@@ -69,6 +72,11 @@ export default function SearchEngine() {
       </div>
     );
   } else {
-    return searchForCity;
+    return (
+      <div className="col-9">
+        {searchForCity}
+        <DefaultInfo />
+      </div>
+    );
   }
 }
