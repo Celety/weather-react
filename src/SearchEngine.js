@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import DefaultInfo from "./DefaultInfo";
 import "./SearchEngine.css";
 
-export default function SearchEngine() {
-  const [city, setCity] = useState("");
-  const [weather, setWeather] = useState({});
-  const [search, setSearch] = useState(false);
+export default function SearchEngine(props) {
+  const [weather, setWeather] = useState({ search: false });
+  const [city, setCity] = useState(props.defaultCity);
 
   function updateCity(event) {
     setCity(event.target.value);
-    console.log(city);
   }
 
   function showWeather(response) {
-    setSearch(true);
     setWeather({
+      search: true,
+      city: response.data.city,
       temperature: response.data.temperature.current,
       wind: response.data.wind.speed,
       humidity: response.data.temperature.humidity,
@@ -34,20 +32,20 @@ export default function SearchEngine() {
   }
 
   let searchForCity = (
-    <div className="SearchEngine">
+    <div className="searchForCity">
       <form onSubmit={changeCity}>
-        <div class="input-group mb-3">
+        <div className="input-group mb-3">
           <input
             type="search"
-            placeholder="Type a city"
-            class="form-control"
+            placeholder="Search for city..."
+            className="form-control"
             aria-label="Recipient's username"
             aria-describedby="button-addon2"
-            autocomplete="off"
+            autoComplete="off"
             onChange={updateCity}
           />
           <button
-            class="btn btn-outline-secondary"
+            className="btn btn-outline-secondary"
             type="submit"
             id="button-addon2"
           >
@@ -58,28 +56,49 @@ export default function SearchEngine() {
     </div>
   );
 
-  if (search) {
+  let defaultInfo = (
+    <div className="defaultInfo">
+      <div className="city" id="current-city">
+        {weather.city}
+      </div>
+      <div className="day" id="current-day">
+        Sunday 30, April
+      </div>
+      <div className="hour" id="current-hour">
+        01:07
+      </div>
+      <div className="weather">
+        <span id="temperature">{Math.round(weather.temperature)}</span>
+        <span id="unit">°C</span>
+        <div className="weather-icon">
+          <img
+            src={weather.icon}
+            alt="weather icon"
+            id="weather-icon"
+            width="130"
+          />
+        </div>
+        <div className="weather-conditions">
+          <div id="weather-description">{weather.description}</div>
+          <div id="wind-speed"> {Math.round(weather.wind)} Km/H</div>
+          <div id="humidity"> {Math.round(weather.humidity)}%</div>
+        </div>
+      </div>
+    </div>
+  );
+
+  if (weather.search) {
     return (
       <div>
         {searchForCity}
-        <DefaultInfo />
-        <ul>
-          <li>Temperature: {Math.round(weather.temperature)}°C</li>
-          <li>Description: {weather.description}</li>
-          <li>Humidity: {Math.round(weather.humidity)}%</li>
-          <li>Wind: {Math.round(weather.wind)} km/h</li>
-          <li>
-            <img src={weather.icon} alt="weather icon" />
-          </li>
-        </ul>
+        {defaultInfo}
       </div>
     );
   } else {
-    return (
-      <div>
-        {searchForCity}
-        <DefaultInfo />
-      </div>
-    );
+    let apiKey = `aed4d88797163123fetdeb5b4oa0a933`;
+    let unit = `metric`;
+    let url = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=${unit}`;
+    axios.get(url).then(showWeather);
+    return <div>Loading...</div>;
   }
 }
