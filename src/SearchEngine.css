@@ -1,5 +1,5 @@
-li {
-  list-style-type: none;
+.SearchEngine {
+  margin-bottom: 20px;
 }
 
 .mainData {
@@ -15,6 +15,7 @@ li {
 .city {
   font-weight: bold;
   font-size: 30px;
+  text-transform: uppercase;
 }
 
 .hour {
@@ -32,5 +33,14 @@ li {
   font-weight: lighter;
   font-size: 1rem;
   font-weight: 400;
+}
+
+#weather-description {
   text-transform: capitalize;
+}
+
+#unit {
+  font-size: 50px;
+  position: relative;
+  top: -20px;
 }

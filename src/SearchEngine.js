@@ -80,8 +80,8 @@ export default function SearchEngine(props) {
         </div>
         <div className="weather-conditions">
           <div id="weather-description">{weather.description}</div>
-          <div id="wind-speed"> {Math.round(weather.wind)} Km/H</div>
-          <div id="humidity"> {Math.round(weather.humidity)}%</div>
+          <div id="wind-speed">Wind speed: {Math.round(weather.wind)} Km/h</div>
+          <div id="humidity">Humidity: {Math.round(weather.humidity)}%</div>
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@ export default function SearchEngine(props) {
 
   if (weather.search) {
     return (
-      <div>
+      <div className="SearchEngine">
         {searchForCity}
         {defaultInfo}
       </div>
