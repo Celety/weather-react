@@ -11,22 +11,25 @@ export default function SearchEngine() {
 
   function updateCity(event) {
     setCity(event.target.value);
+    console.log(city);
   }
 
   function showWeather(response) {
     setSearch(true);
     setWeather({
-      temperature: response.data.main.temp,
+      temperature: response.data.temperature.current,
       wind: response.data.wind.speed,
-      humidity: response.data.main.humidity,
-      description: response.data.weather[0].description,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      humidity: response.data.temperature.humidity,
+      description: response.data.condition.description,
+      icon: response.data.condition.icon_url,
     });
   }
 
   function changeCity(event) {
     event.preventDefault();
-    let url = `https://api.openweathermap.org/data/2.5/weather?&q=${city}&appid=3c949ba49d38be2487ee278e0d2d4059&units=metric`;
+    let apiKey = `aed4d88797163123fetdeb5b4oa0a933`;
+    let unit = `metric`;
+    let url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${unit}`;
     axios.get(url).then(showWeather);
   }
 
@@ -57,7 +60,7 @@ export default function SearchEngine() {
 
   if (search) {
     return (
-      <div className="col-9">
+      <div>
         {searchForCity}
         <DefaultInfo />
         <ul>
@@ -73,7 +76,7 @@ export default function SearchEngine() {
     );
   } else {
     return (
-      <div className="col-9">
+      <div>
         {searchForCity}
         <DefaultInfo />
       </div>

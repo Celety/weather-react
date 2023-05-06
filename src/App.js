@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import SearchEngine from "./SearchEngine";
 import Footer from "./Footer";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <div className="Content">
@@ -14,5 +14,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
