@@ -40,7 +40,17 @@
 }
 
 #unit {
-  font-size: 50px;
+  font-size: 30px;
   position: relative;
-  top: -20px;
+  top: -35px;
+}
+
+#unit a {
+  color: gray;
+  text-decoration: none;
+}
+
+#unit a:hover {
+  color: whitesmoke;
+  text-decoration: underline;
 }
