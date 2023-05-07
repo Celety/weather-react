@@ -3,6 +3,8 @@ import axios from "axios";
 
 import "./SearchEngine.css";
 
+import FormattedDate from "./FormattedDate";
+
 export default function SearchEngine(props) {
   const [weather, setWeather] = useState({ search: false });
   const [city, setCity] = useState(props.defaultCity);
@@ -20,6 +22,7 @@ export default function SearchEngine(props) {
       humidity: response.data.temperature.humidity,
       description: response.data.condition.description,
       icon: response.data.condition.icon_url,
+      date: new Date(response.data.time * 1000),
     });
   }
 
@@ -61,11 +64,8 @@ export default function SearchEngine(props) {
       <div className="city" id="current-city">
         {weather.city}
       </div>
-      <div className="day" id="current-day">
-        Sunday 30, April
-      </div>
-      <div className="hour" id="current-hour">
-        01:07
+      <div className="currentDate">
+        <FormattedDate date={weather.date} />
       </div>
       <div className="weather">
         <span id="temperature">{Math.round(weather.temperature)}</span>
