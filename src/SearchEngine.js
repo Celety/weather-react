@@ -3,7 +3,7 @@ import axios from "axios";
 
 import "./SearchEngine.css";
 
-import FormattedDate from "./FormattedDate";
+import WeatherInfo from "./WeatherInfo";
 
 export default function SearchEngine(props) {
   const [weather, setWeather] = useState({ search: false });
@@ -26,12 +26,16 @@ export default function SearchEngine(props) {
     });
   }
 
-  function changeCity(event) {
-    event.preventDefault();
+  function searchForUserCity() {
     let apiKey = `aed4d88797163123fetdeb5b4oa0a933`;
     let unit = `metric`;
     let url = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=${unit}`;
     axios.get(url).then(showWeather);
+  }
+
+  function changeCity(event) {
+    event.preventDefault();
+    searchForUserCity();
   }
 
   let searchForCity = (
@@ -58,47 +62,15 @@ export default function SearchEngine(props) {
       </form>
     </div>
   );
-
-  let defaultInfo = (
-    <div className="defaultInfo">
-      <div className="city" id="current-city">
-        {weather.city}
-      </div>
-      <div className="currentDate">
-        <FormattedDate date={weather.date} />
-      </div>
-      <div className="weather">
-        <span id="temperature">{Math.round(weather.temperature)}</span>
-        <span id="unit">°C</span>
-        <div className="weather-icon">
-          <img
-            src={weather.icon}
-            alt="weather icon"
-            id="weather-icon"
-            width="130"
-          />
-        </div>
-        <div className="weather-conditions">
-          <div id="weather-description">{weather.description}</div>
-          <div id="wind-speed">Wind speed: {Math.round(weather.wind)} Km/h</div>
-          <div id="humidity">Humidity: {Math.round(weather.humidity)}%</div>
-        </div>
-      </div>
-    </div>
-  );
-
   if (weather.search) {
     return (
       <div className="SearchEngine">
         {searchForCity}
-        {defaultInfo}
+        <WeatherInfo data={weather} />
       </div>
     );
   } else {
-    let apiKey = `aed4d88797163123fetdeb5b4oa0a933`;
-    let unit = `metric`;
-    let url = `https://api.shecodes.io/weather/v1/current?query=${props.defaultCity}&key=${apiKey}&units=${unit}`;
-    axios.get(url).then(showWeather);
+    searchForUserCity();
     return <div>Loading...</div>;
   }
 }
