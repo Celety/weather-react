@@ -1,0 +1,15 @@
+.WeatherForecast {
+  text-align: center;
+  color: white;
+}
+
+#forecast {
+  background-color: rgba(0, 0, 0, 0.8);
+  margin: 2px;
+  padding: 4px 0px;
+  color: white;
+}
+
+.temp-min {
+  color: darkgrey;
+}

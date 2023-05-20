@@ -2,6 +2,10 @@
   margin-bottom: 20px;
 }
 
+.WeatherInfo {
+  margin: 0;
+}
+
 .mainData {
   margin-top: 2px;
   padding-left: 4px;
@@ -33,6 +37,10 @@
   font-weight: lighter;
   font-size: 1rem;
   font-weight: 400;
+}
+
+.weather-icon {
+  margin: 20px;
 }
 
 #weather-description {

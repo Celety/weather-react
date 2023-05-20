@@ -4,6 +4,7 @@ import axios from "axios";
 import "./SearchEngine.css";
 
 import WeatherInfo from "./WeatherInfo";
+import WeatherForecast from "./WeatherForecast";
 
 export default function SearchEngine(props) {
   const [weather, setWeather] = useState({ search: false });
@@ -66,7 +67,10 @@ export default function SearchEngine(props) {
     return (
       <div className="SearchEngine">
         {searchForCity}
-        <WeatherInfo data={weather} />
+        <div className="row">
+          <WeatherInfo data={weather} />
+          <WeatherForecast />
+        </div>
       </div>
     );
   } else {
