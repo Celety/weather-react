@@ -1,87 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+
+import WeatherForecastDay from "./WeatherForecastDay";
 
 import "./WeatherForecast.css";
 
-export default function WeatherForecast() {
-  return (
-    <div className="WeatherForecast col-4">
-      <ul className="list-group">
-        <li className="list-group-item" id="forecast">
-          <div className="WeatherForecast-day">mon</div>
-          <div className="WeatherForecast-icon">
-            {" "}
-            <img
-              src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png"
-              alt=""
-              width="38"
-            />
-          </div>
-          <div className="WeatherForecast-temp">
-            <span className="temp-max">max</span>{" "}
-            <span className="temp-min"> min</span>
-          </div>
-        </li>
-        <li className="list-group-item" id="forecast">
-          <div className="WeatherForecast-day">mon</div>
-          <div className="WeatherForecast-icon">
-            {" "}
-            <img
-              src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png"
-              alt=""
-              width="38"
-            />
-          </div>
-          <div className="WeatherForecast-temp">
-            <span className="temp-max">max</span>{" "}
-            <span className="temp-min"> min</span>
-          </div>
-        </li>
-        <li className="list-group-item" id="forecast">
-          <div className="WeatherForecast-day">mon</div>
-          <div className="WeatherForecast-icon">
-            {" "}
-            <img
-              src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png"
-              alt=""
-              width="38"
-            />
-          </div>
-          <div className="WeatherForecast-temp">
-            <span className="temp-max">max</span>{" "}
-            <span className="temp-min"> min</span>
-          </div>
-        </li>
-        <li className="list-group-item" id="forecast">
-          <div className="WeatherForecast-day">mon</div>
-          <div className="WeatherForecast-icon">
-            {" "}
-            <img
-              src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png"
-              alt=""
-              width="38"
-            />
-          </div>
-          <div className="WeatherForecast-temp">
-            <span className="temp-max">max</span>{" "}
-            <span className="temp-min"> min</span>
-          </div>
-        </li>
-        <li className="list-group-item" id="forecast">
-          <div className="WeatherForecast-day">mon</div>
-          <div className="WeatherForecast-icon">
-            {" "}
-            <img
-              src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/clear-sky-night.png"
-              alt=""
-              width="38"
-            />
-          </div>
-          <div className="WeatherForecast-temp">
-            <span className="temp-max">max</span>{" "}
-            <span className="temp-min"> min</span>
-          </div>
-        </li>
-      </ul>
-    </div>
-  );
+export default function WeatherForecast(props) {
+  let [loaded, setLoaded] = useState(false);
+  let [forecast, setForecast] = useState(null);
+  function handleResponse(response) {
+    setForecast(response.data);
+    setLoaded(true);
+  }
+
+  if (loaded) {
+    return (
+      <div className="WeatherForecast col-4">
+        <WeatherForecastDay data={forecast.daily[0]} />
+      </div>
+    );
+  } else {
+    let city = props.city;
+    let apiKey = `aed4d88797163123fetdeb5b4oa0a933`;
+    let apiUnit = `metric`;
+    let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=${apiUnit}`;
+
+    axios.get(apiUrl).then(handleResponse);
+
+    return null;
+  }
 }

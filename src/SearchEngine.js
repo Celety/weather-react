@@ -69,7 +69,7 @@ export default function SearchEngine(props) {
         {searchForCity}
         <div className="row">
           <WeatherInfo data={weather} />
-          <WeatherForecast />
+          <WeatherForecast city={weather.city} />
         </div>
       </div>
     );
