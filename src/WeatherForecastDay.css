@@ -1,0 +1,15 @@
+#forecast {
+  background-color: rgba(0, 0, 0, 0.4);
+  margin: 2px;
+  padding: 4px 0px;
+  color: white;
+}
+
+li#forecast.list-group-item {
+  border-radius: 10px;
+  border-color: rgb(40, 40, 40);
+}
+
+.temp-min {
+  color: darkgrey;
+}
