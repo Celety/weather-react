@@ -6,16 +6,6 @@
   margin: 0;
 }
 
-.mainData {
-  margin-top: 2px;
-  padding-left: 4px;
-}
-
-.hourlyForecast {
-  padding: 0px;
-  margin: 0 auto;
-}
-
 .city {
   font-weight: bold;
   font-size: 30px;
