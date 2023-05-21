@@ -11,14 +11,14 @@ export default function WeatherForecastDay(props) {
   }
 
   return (
-    <ul className="list-group">
+    <div className="WeatherForecastDay">
       <li className="list-group-item" id="forecast">
         <div className="WeatherForecast-day">{day()}</div>
         <div className="WeatherForecast-icon">
           <img
             src={props.data.condition.icon_url}
             alt={props.data.condition.icon}
-            width="50"
+            width="38"
           />
         </div>
         <div className="WeatherForecast-temp">
@@ -30,6 +30,6 @@ export default function WeatherForecastDay(props) {
           </span>
         </div>
       </li>
-    </ul>
+    </div>
   );
 }
